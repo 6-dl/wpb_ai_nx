@@ -1,0 +1,19 @@
+<launch>
+
+  <arg name="model" default="$(find wpb_ai_bringup)/urdf/wpb_ai.urdf"/>
+  <arg name="gui" default="true" />
+  <arg name="rvizconfig" default="$(find wpb_ai_bringup)/rviz/sensor.rviz" />
+
+  <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
+  <param name="use_gui" value="$(arg gui)"/>
+
+  <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" >
+    <rosparam command="load" file="$(find wpb_ai_bringup)/config/wpb_ai.yaml" />
+  </node>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+  <!--- Run Kinect -->
+  <include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch" />
+
+</launch>

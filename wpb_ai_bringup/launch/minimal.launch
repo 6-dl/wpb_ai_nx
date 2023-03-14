@@ -1,0 +1,9 @@
+<launch>
+
+  <!-- wpb_ai core-->
+  <node pkg="wpb_ai_bringup" type="wpb_ai_core" name="wpb_ai_core" output="screen">
+    <param name="serial_port" type="string" value="/dev/ftdi"/> 
+    <rosparam file="$(find wpb_ai_bringup)/config/wpb_ai.yaml" command="load" />
+  </node>
+
+</launch>

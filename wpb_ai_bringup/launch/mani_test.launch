@@ -1,0 +1,8 @@
+<launch>
+
+  <!-- wpb_ai mani test-->
+  <node pkg="wpb_ai_bringup" type="wpb_ai_test_mani" name="wpb_ai_test_mani" output="screen">
+    <param name="serial_port" type="string" value="/dev/ftdi"/> 
+  </node>
+
+</launch>

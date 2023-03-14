@@ -1,0 +1,10 @@
+<launch>
+
+  <node pkg="wpb_ai_behaviors" type="wpb_ai_grab_server" name="wpb_ai_grab_server">
+    <param name="start" type="bool" value="false"/> 
+    <rosparam file="$(find wpb_ai_bringup)/config/wpb_ai.yaml" command="load" />
+  </node>
+
+  <node pkg="wpb_ai_behaviors" type="wpb_ai_pass_server" name="wpb_ai_pass_server"/>
+
+</launch>

@@ -1,0 +1,20 @@
+<launch>
+
+  <arg name="model" default="$(find wpb_ai_bringup)/urdf/wpb_ai_mani.urdf"/>
+  <arg name="gui" default="true" />
+  <arg name="rvizconfig" default="$(find wpb_ai_bringup)/rviz/urdf.rviz" />
+
+  <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
+  <param name="use_gui" value="$(arg gui)"/>
+
+  
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+  <!-- wpb_ai core-->
+  <node pkg="wpb_ai_bringup" type="wpb_ai_core" name="wpb_ai_core" output="screen">
+    <param name="serial_port" type="string" value="/dev/ftdi"/> 
+    <rosparam file="$(find wpb_ai_bringup)/config/wpb_ai.yaml" command="load" />
+  </node>
+
+</launch>
